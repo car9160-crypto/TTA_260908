@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+        .todo-item { display: flex; align-items: center; margin-bottom: 0.5rem; }
+        .todo-item span { flex-grow: 1; margin-left: 0.5rem; }
+        .done { text-decoration: line-through; color: #888; }
+        button { margin-left: 0.5rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form action="/add" method="POST" style="margin-bottom: 1rem; display: flex;">
+        <input type="text" name="todo" placeholder="Add a new task" required style="flex-grow: 1; padding: 0.5rem;">
+        <button type="submit" style="padding: 0.5rem 1rem;">Add</button>
+    </form>
+    
+    <div>
+        {% for todo in todos %}
+        <div class="todo-item">
+            <a href="/toggle/{{ loop.index0 }}" style="text-decoration: none;">
+                {% if todo.done %}✅{% else %}⬜{% endif %}
+            </a>
+            <span class="{% if todo.done %}done{% endif %}">{{ todo.task }}</span>
+            <form action="/delete/{{ loop.index0 }}" method="GET" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
