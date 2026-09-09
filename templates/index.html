@@ -22,11 +22,11 @@
     <div>
         {% for todo in todos %}
         <div class="todo-item">
-            <a href="/toggle/{{ loop.index0 }}" style="text-decoration: none;">
+            <a href="/toggle/{{ todo.id }}" style="text-decoration: none;">
                 {% if todo.done %}✅{% else %}⬜{% endif %}
             </a>
             <span class="{% if todo.done %}done{% endif %}">{{ todo.task }}</span>
-            <form action="/delete/{{ loop.index0 }}" method="GET" style="display:inline;">
+            <form action="/delete/{{ todo.id }}" method="GET" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </div>
